@@ -18,47 +18,69 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0 5">
-            <TextBox x:Name="tbSearch" Height="30" Width="200" VerticalContentAlignment="Center"/>
-            
+            <TextBox x:Name="tbSearch" Height="30" Width="300" VerticalContentAlignment="Center"/>
+            <ComboBox Width="200" x:Name="cmBoxSort" Margin="10 0">
+                
+            </ComboBox>
+            <ComboBox>
+                
+            </ComboBox>
         </StackPanel>
-        <ListView Grid.Row="1" x:Name="lvAgents" ItemsSource="{Binding Agents}">
+        <ListView Grid.Row="1" x:Name="lvAgents" ItemsSource="{Binding Agents}" HorizontalContentAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="Black" BorderThickness="1">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                            <Image Width="100">
-                                <Image.Source>
-                                    <Binding Path="Logo">
-                                        <Binding.TargetNullValue>
-                                            <ImageSource>/Resourses/picture.png</ImageSource>
-                                        </Binding.TargetNullValue>
-                                    </Binding>
-                                </Image.Source>
-                            </Image>
-                            <TextBlock Text="{Binding Title}"/>
-                            <StackPanel Margin="10 0">
-                                <TextBlock FontSize="20" >
+                        <Border BorderBrush="Black" BorderThickness="1" >
+                    <Grid>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                                <Image Width="100">
+                                    <Image.Source>
+                                        <Binding Path="Logo">
+                                            <Binding.TargetNullValue>
+                                                <ImageSource>/Resourses/picture.png</ImageSource>
+                                            </Binding.TargetNullValue>
+                                        </Binding>
+                                    </Image.Source>
+                                </Image>
+                                <StackPanel Margin="10 0" Width="400">
+                                    <TextBlock FontSize="20" >
                                         <Run Text="{Binding AgentType.Title}"/>
                                         <Run Text="|"/>
                                         <Run Text="{Binding Title}"/>
-                                </TextBlock>
-                                <TextBlock Text="{Binding SellsCount, StringFormat='{}0 продаж за год' }"/>
-                                <TextBlock Text="{Binding Phone}"/>
-                                <TextBlock >
+                                    </TextBlock>
+                                    <TextBlock Text="{Binding SellsCount, StringFormat='{}0 продаж за год' }"/>
+                                    <TextBlock Text="{Binding Phone}"/>
+                                    <TextBlock >
                                         <Run Text="Приоритетность"/>
                                         <Run Text="{Binding Priority}"/>
-                                </TextBlock>
-                            </StackPanel>
-                        <TextBlock Text="{Binding Discount, StringFormat='{}{0}%'}" 
+                                    </TextBlock>
+                                </StackPanel>
+
+
+
+                                <TextBlock Text="{Binding Discount, StringFormat='{}{0}%'}" 
                                        FontSize="18"
                                        Margin="10"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Right"/>
-                       
-                        </StackPanel>
-                    </Border>
+
+                            </StackPanel>
+                    </Grid>
+                        </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="↤" x:Name="btnGoPrevious" Click="btnGoPrevious_Click"/>
+                <Label x:Name="lblPages" VerticalContentAlignment="Center"/>
+                <Button Content="↣" x:Name="btnGoForward" Click="btnGoForward_Click"/>
+            </StackPanel>
+            <ComboBox Name="cmBox" Margin="100 0 0 0" SelectionChanged="cmBox_SelectionChanged">
+                <ComboBoxItem Content="10" Selector.IsSelected="True"/>
+                <ComboBoxItem Content="50"/>
+                <ComboBoxItem Content="200"/>
+                <ComboBoxItem Content="Все"/>
+            </ComboBox>
+        </StackPanel>
     </Grid>
 </Page>
